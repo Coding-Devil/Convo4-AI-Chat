@@ -30,6 +30,18 @@ model_links ={
 
 }
 
+#Pull info about the model to display
+model_info ={
+    "Mistral":
+        {'description':"""The Mistral model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
+            \nIt was created by the [**Mistral AI**](https://mistral.ai/news/announcing-mistral-7b/) team as has over  **7 billion parameters.** \n""",
+        'logo':'https://mistral.ai/images/logo_hubc88c4ece131b91c7cb753f40e9e1cc5_2589_256x0_resize_q97_h2_lanczos_3.webp'},
+    "Gemma":        
+        {'description':"""The Gemma model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
+            \nIt was created by the [**Google's AI Team**](https://blog.google/technology/developers/gemma-open-models/) team as has over  **7 billion parameters.** \n""",
+        'logo':'https://pbs.twimg.com/media/GG3sJg7X0AEaNIq.jpg'},
+
+}
 
 
 # Define the available models
@@ -39,6 +51,10 @@ models =[key for key in model_links.keys()]
 # Create the sidebar with the dropdown for model selection
 selected_model = st.sidebar.selectbox("Select Model", models)
 
+# Create model description
+st.sidebar.write(f"You're now chatting with **{selected_model}**")
+st.sidebar.markdown(model_info[selected_model]['description'])
+st.sidebar.image(model_info[selected_model]['logo'])
 
 
 #Pull in the model we want to use
