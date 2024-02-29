@@ -25,7 +25,8 @@ client = OpenAI(
 #Create supported models
 model_links ={
     "Mistral":"mistralai/Mistral-7B-Instruct-v0.2",
-    "Gemma":"google/gemma-7b-it"
+    "Gemma":"google/gemma-7b-it",
+    "Llama-2":"meta-llama/Llama-2-7b-chat-hf"
 
 }
 
