@@ -81,7 +81,7 @@ for message in st.session_state.messages:
 
 
 # Accept user input
-if prompt := st.chat_input("What is up?"):
+if prompt := st.chat_input(f"Hi I'm {selected_model}, ask me a question"):
 
     # Display user message in chat message container
     with st.chat_message("user"):
