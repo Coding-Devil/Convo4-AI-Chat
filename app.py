@@ -3,8 +3,8 @@ from openai import OpenAI
 import os
 import sys
 from langchain.callbacks import StreamlitCallbackHandler
-# from dotenv import load_dotenv, dotenv_values
-# load_dotenv()
+from dotenv import load_dotenv, dotenv_values
+load_dotenv()
 
 
 if 'key' not in st.session_state:
@@ -16,7 +16,7 @@ if 'key' not in st.session_state:
 # initialize the client but point it to TGI
 client = OpenAI(
   base_url="https://api-inference.huggingface.co/v1",
-  #api_key=os.environ.get('HUGGINGFACEHUB_API_TOKEN')#"hf_xxx" # Replace with your token
+  api_key=os.environ.get('HUGGINGFACEHUB_API_TOKEN')#"hf_xxx" # Replace with your token
 ) 
 
 
