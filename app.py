@@ -61,8 +61,8 @@ st.sidebar.image(model_info[selected_model]['logo'])
 repo_id = model_links[selected_model]
 
 
-
-st.title(f'ChatBot Using {selected_model}')
+st.subheader(f'AI - {selected_model}')
+# st.title(f'ChatBot Using {selected_model}')
 
 # Set a default model
 if selected_model not in st.session_state:
