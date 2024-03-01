@@ -2,7 +2,6 @@ import streamlit as st
 from openai import OpenAI
 import os
 import sys
-from langchain.callbacks import StreamlitCallbackHandler
 from dotenv import load_dotenv, dotenv_values
 load_dotenv()
 
@@ -132,8 +131,6 @@ if prompt := st.chat_input(f"Hi I'm {selected_model}, ask me a question"):
 
     # Display assistant response in chat message container
     with st.chat_message("assistant"):
-        st_callback = StreamlitCallbackHandler(st.container())
-
         stream = client.chat.completions.create(
             model=model_links[selected_model],
             messages=[
