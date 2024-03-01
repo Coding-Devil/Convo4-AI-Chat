@@ -22,7 +22,9 @@ client = OpenAI(
 #Create supported models
 model_links ={
     "Mistral":"mistralai/Mistral-7B-Instruct-v0.2",
-    "Gemma":"google/gemma-7b-it",
+    "Gemma-7B":"google/gemma-7b-it",
+    "Gemma-2B":"google/gemma-2b-it",
+    "Gemma-Zephyr":"HuggingFaceH4/zephyr-7b-gemma-v0.1",
     # "Llama-2":"meta-llama/Llama-2-7b-chat-hf"
 
 }
@@ -33,16 +35,25 @@ model_info ={
         {'description':"""The Mistral model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
             \nIt was created by the [**Mistral AI**](https://mistral.ai/news/announcing-mistral-7b/) team as has over  **7 billion parameters.** \n""",
         'logo':'https://mistral.ai/images/logo_hubc88c4ece131b91c7cb753f40e9e1cc5_2589_256x0_resize_q97_h2_lanczos_3.webp'},
-    "Gemma":        
+    "Gemma-7B":        
         {'description':"""The Gemma model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
             \nIt was created by the [**Google's AI Team**](https://blog.google/technology/developers/gemma-open-models/) team as has over  **7 billion parameters.** \n""",
         'logo':'https://pbs.twimg.com/media/GG3sJg7X0AEaNIq.jpg'},
+    "Gemma-2B":        
+    {'description':"""The Gemma model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
+        \nIt was created by the [**Google's AI Team**](https://blog.google/technology/developers/gemma-open-models/) team as has over  **2 billion parameters.** \n""",
+    'logo':'https://pbs.twimg.com/media/GG3sJg7X0AEaNIq.jpg'},
+    "Gemma-Zephyr":        
+    {'description':"""The Gemma model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
+        \nFrom Huggingface: Zephyr is a series of language models that are trained to act as helpful assistants. \
+        Zephyr 7B Gemma is the third model in the series, and is a fine-tuned version of google/gemma-7b \
+        that was trained on on a mix of publicly available, synthetic datasets using Direct Preference Optimization (DPO)\n""",
+    'logo':'https://huggingface.co/HuggingFaceH4/zephyr-7b-gemma-v0.1/resolve/main/thumbnail.png'},
 
 }
 
 
 # Define the available models
-# models = ["Mistral", "Gemma"]
 models =[key for key in model_links.keys()]
 
 # Create the sidebar with the dropdown for model selection
