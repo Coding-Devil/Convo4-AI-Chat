@@ -60,14 +60,7 @@ def reset_conversation():
     st.session_state.messages = []
     return None
     
-if "prev_option" not in st.session_state:
-    st.session_state.prev_option = selected_model
 
-if st.session_state.prev_option != selected_model:
-    st.session_state.messages = []
-    st.write(f"Changed to {selected_model}")
-    st.session_state.prev_option = selected_model
-    reset_conversation()
 
 
 # Define the available models
@@ -89,6 +82,20 @@ st.sidebar.write(f"You're now chatting with **{selected_model}**")
 st.sidebar.markdown(model_info[selected_model]['description'])
 st.sidebar.image(model_info[selected_model]['logo'])
 st.sidebar.markdown("*Generated content may be inaccurate or false.*")
+
+
+
+
+if "prev_option" not in st.session_state:
+    st.session_state.prev_option = selected_model
+
+if st.session_state.prev_option != selected_model:
+    st.session_state.messages = []
+    st.write(f"Changed to {selected_model}")
+    st.session_state.prev_option = selected_model
+    reset_conversation()
+
+
 
 #Pull in the model we want to use
 repo_id = model_links[selected_model]
