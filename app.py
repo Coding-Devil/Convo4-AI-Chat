@@ -24,7 +24,7 @@ model_links ={
     "Mistral":"mistralai/Mistral-7B-Instruct-v0.2",
     "Gemma-7B":"google/gemma-7b-it",
     "Gemma-2B":"google/gemma-2b-it",
-    "Gemma-Zephyr":"HuggingFaceH4/zephyr-7b-gemma-v0.1",
+    # "Gemma-Zephyr":"HuggingFaceH4/zephyr-7b-gemma-v0.1",
     # "Llama-2":"meta-llama/Llama-2-7b-chat-hf"
 
 }
@@ -52,6 +52,23 @@ model_info ={
 
 }
 
+def reset_conversation():
+    '''
+    Resets Conversation
+    '''
+    st.session_state.conversation = []
+    st.session_state.messages = []
+    return None
+    
+if "prev_option" not in st.session_state:
+    st.session_state.prev_option = selected_model
+
+if st.session_state.prev_option != selected_model:
+    st.session_state.messages = []
+    st.write(f"Changed to {selected_model}")
+    st.session_state.prev_option = selected_model
+    reset_conversation()
+
 
 # Define the available models
 models =[key for key in model_links.keys()]
@@ -59,11 +76,19 @@ models =[key for key in model_links.keys()]
 # Create the sidebar with the dropdown for model selection
 selected_model = st.sidebar.selectbox("Select Model", models)
 
+#Create a temperature slider
+temp_values = st.sidebar.slider('Select a temperature value', 0.0, 1.0, (0.5))
+
+
+#Add reset button to clear conversation
+st.sidebar.button('Reset Chat', on_click=reset_conversation) #Reset button
+
+
 # Create model description
 st.sidebar.write(f"You're now chatting with **{selected_model}**")
 st.sidebar.markdown(model_info[selected_model]['description'])
 st.sidebar.image(model_info[selected_model]['logo'])
-
+st.sidebar.markdown("*Generated content may be inaccurate or false.*")
 
 #Pull in the model we want to use
 repo_id = model_links[selected_model]
@@ -108,7 +133,7 @@ if prompt := st.chat_input(f"Hi I'm {selected_model}, ask me a question"):
                 {"role": m["role"], "content": m["content"]}
                 for m in st.session_state.messages
             ],
-            temperature=0.5,
+            temperature=temp_values,#0.5,
             stream=True,
             max_tokens=3000,
         )
