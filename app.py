@@ -7,9 +7,6 @@ from dotenv import load_dotenv, dotenv_values
 load_dotenv()
 
 
-if 'key' not in st.session_state:
-    st.session_state['key'] = 'value'
-
 
 
 
