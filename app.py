@@ -91,7 +91,7 @@ if "prev_option" not in st.session_state:
 
 if st.session_state.prev_option != selected_model:
     st.session_state.messages = []
-    st.write(f"Changed to {selected_model}")
+    # st.write(f"Changed to {selected_model}")
     st.session_state.prev_option = selected_model
     reset_conversation()
 
