@@ -1,3 +1,9 @@
+""" Simple Chatbot
+@author: Nigel Gebodh
+@email: nigel.gebodh@gmail.com
+
+"""
+
 import streamlit as st
 from openai import OpenAI
 import os
@@ -9,7 +15,7 @@ load_dotenv()
 
 
 
-# initialize the client but point it to TGI
+# initialize the client
 client = OpenAI(
   base_url="https://api-inference.huggingface.co/v1",
   api_key=os.environ.get('HUGGINGFACEHUB_API_TOKEN')#"hf_xxx" # Replace with your token
@@ -23,7 +29,7 @@ model_links ={
     "Mistral":"mistralai/Mistral-7B-Instruct-v0.2",
     "Gemma-7B":"google/gemma-7b-it",
     "Gemma-2B":"google/gemma-2b-it",
-    # "Gemma-Zephyr":"HuggingFaceH4/zephyr-7b-gemma-v0.1",
+    "Zephyr-7B-β":"HuggingFaceH4/zephyr-7b-beta",
     # "Llama-2":"meta-llama/Llama-2-7b-chat-hf"
 
 }
@@ -42,12 +48,22 @@ model_info ={
     {'description':"""The Gemma model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
         \nIt was created by the [**Google's AI Team**](https://blog.google/technology/developers/gemma-open-models/) team as has over  **2 billion parameters.** \n""",
     'logo':'https://pbs.twimg.com/media/GG3sJg7X0AEaNIq.jpg'},
-    "Gemma-Zephyr":        
-    {'description':"""The Gemma model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
-        \nFrom Huggingface: Zephyr is a series of language models that are trained to act as helpful assistants. \
-        Zephyr 7B Gemma is the third model in the series, and is a fine-tuned version of google/gemma-7b \
+    "Zephyr-7B":        
+    {'description':"""The Zephyr model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
+        \nFrom Huggingface: \n\
+        Zephyr is a series of language models that are trained to act as helpful assistants. \
+        [Zephyr 7B Gemma](https://huggingface.co/HuggingFaceH4/zephyr-7b-gemma-v0.1)\
+        is the third model in the series, and is a fine-tuned version of google/gemma-7b \
         that was trained on on a mix of publicly available, synthetic datasets using Direct Preference Optimization (DPO)\n""",
     'logo':'https://huggingface.co/HuggingFaceH4/zephyr-7b-gemma-v0.1/resolve/main/thumbnail.png'},
+    "Zephyr-7B-β":        
+    {'description':"""The Zephyr model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
+        \nFrom Huggingface: \n\
+        Zephyr is a series of language models that are trained to act as helpful assistants. \
+        [Zephyr-7B-β](https://huggingface.co/HuggingFaceH4/zephyr-7b-beta)\
+        is the second model in the series, and is a fine-tuned version of mistralai/Mistral-7B-v0.1 \
+        that was trained on on a mix of publicly available, synthetic datasets using Direct Preference Optimization (DPO)\n""",
+    'logo':'https://huggingface.co/HuggingFaceH4/zephyr-7b-alpha/resolve/main/thumbnail.png'},
 
 }
 
