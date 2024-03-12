@@ -96,6 +96,7 @@ st.sidebar.write(f"You're now chatting with **{selected_model}**")
 st.sidebar.markdown(model_info[selected_model]['description'])
 st.sidebar.image(model_info[selected_model]['logo'])
 st.sidebar.markdown("*Generated content may be inaccurate or false.*")
+st.sidebar.markdown("\nLearn how to build this chatbot [here](https://ngebodh.github.io/projects/2024-03-05/).")
 st.sidebar.markdown("\nRun into issues? Try the [back-up](https://huggingface.co/spaces/ngebodh/SimpleChatbot-Backup).")
 
 
