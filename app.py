@@ -30,7 +30,6 @@ model_links ={
     "Gemma-7B":"google/gemma-7b-it",
     "Gemma-2B":"google/gemma-2b-it",
     "Zephyr-7B-β":"HuggingFaceH4/zephyr-7b-beta",
-    # "Llama-2":"meta-llama/Llama-2-7b-chat-hf"
 
 }
 
@@ -97,6 +96,7 @@ st.sidebar.write(f"You're now chatting with **{selected_model}**")
 st.sidebar.markdown(model_info[selected_model]['description'])
 st.sidebar.image(model_info[selected_model]['logo'])
 st.sidebar.markdown("*Generated content may be inaccurate or false.*")
+st.sidebar.markdown("\nOut of API calls? Try the [back-up](https://huggingface.co/spaces/ngebodh/SimpleChatbot-Backup).")
 
 
 
