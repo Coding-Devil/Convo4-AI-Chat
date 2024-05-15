@@ -66,7 +66,7 @@ model_info ={
     'logo':'https://huggingface.co/HuggingFaceH4/zephyr-7b-alpha/resolve/main/thumbnail.png'},
     "Meta-Llama-3-8B":
     {'description':"""The Llama (3) model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
-        \nIt was created by the [**Meta's AI**](https://llama.meta.com/) team as has over  **8 billion parameters.** \n""",
+        \nIt was created by the [**Meta's AI**](https://llama.meta.com/) team and has over  **8 billion parameters.** \n""",
     'logo':'Llama_logo.png'},
 }
 
