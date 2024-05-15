@@ -3,7 +3,7 @@
 @email: nigel.gebodh@gmail.com
 
 """
-
+import numpy as np
 import streamlit as st
 from openai import OpenAI
 import os
@@ -26,9 +26,10 @@ client = OpenAI(
 
 #Create supported models
 model_links ={
-    "Mistral":"mistralai/Mistral-7B-Instruct-v0.2",
-    "Gemma-7B":"google/gemma-7b-it",
-    "Gemma-2B":"google/gemma-2b-it",
+    "Meta-Llama-3-8B":"meta-llama/Meta-Llama-3-8B-Instruct", 
+    "Mistral-7B":"mistralai/Mistral-7B-Instruct-v0.2",
+    "Gemma-7B":"google/gemma-1.1-7b-it",
+    "Gemma-2B":"google/gemma-1.1-2b-it",
     "Zephyr-7B-β":"HuggingFaceH4/zephyr-7b-beta",
 
 }
@@ -63,8 +64,29 @@ model_info ={
         is the second model in the series, and is a fine-tuned version of mistralai/Mistral-7B-v0.1 \
         that was trained on on a mix of publicly available, synthetic datasets using Direct Preference Optimization (DPO)\n""",
     'logo':'https://huggingface.co/HuggingFaceH4/zephyr-7b-alpha/resolve/main/thumbnail.png'},
-
+    "Meta-Llama-3-8B":
+    {'description':"""The Llama (3) model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
+        \nIt was created by the [**Meta's AI**](https://llama.meta.com/) team as has over  **8 billion parameters.** \n""",
+    'logo':'Llama_logo.png'},
 }
+
+
+#Random dog images for error message
+random_dog = ["0f476473-2d8b-415e-b944-483768418a95.jpg",
+              "1bd75c81-f1d7-4e55-9310-a27595fa8762.jpg",
+              "526590d2-8817-4ff0-8c62-fdcba5306d02.jpg",
+              "1326984c-39b0-492c-a773-f120d747a7e2.jpg",
+              "42a98d03-5ed7-4b3b-af89-7c4876cb14c3.jpg",
+              "8b3317ed-2083-42ac-a575-7ae45f9fdc0d.jpg",
+              "ee17f54a-83ac-44a3-8a35-e89ff7153fb4.jpg",
+              "027eef85-ccc1-4a66-8967-5d74f34c8bb4.jpg",
+              "08f5398d-7f89-47da-a5cd-1ed74967dc1f.jpg",
+              "0fd781ff-ec46-4bdc-a4e8-24f18bf07def.jpg",
+              "0fb4aeee-f949-4c7b-a6d8-05bf0736bdd1.jpg",
+              "6edac66e-c0de-4e69-a9d6-b2e6f6f9001b.jpg",
+              "bfb9e165-c643-4993-9b3a-7e73571672a6.jpg"]
+
+
 
 def reset_conversation():
     '''
@@ -148,16 +170,36 @@ if prompt := st.chat_input(f"Hi I'm {selected_model}, ask me a question"):
 
     # Display assistant response in chat message container
     with st.chat_message("assistant"):
-        stream = client.chat.completions.create(
-            model=model_links[selected_model],
-            messages=[
-                {"role": m["role"], "content": m["content"]}
-                for m in st.session_state.messages
-            ],
-            temperature=temp_values,#0.5,
-            stream=True,
-            max_tokens=3000,
-        )
 
-        response = st.write_stream(stream)
+        try:
+            stream = client.chat.completions.create(
+                model=model_links[selected_model],
+                messages=[
+                    {"role": m["role"], "content": m["content"]}
+                    for m in st.session_state.messages
+                ],
+                temperature=temp_values,#0.5,
+                stream=True,
+                max_tokens=3000,
+            )
+    
+            response = st.write_stream(stream)
+
+        except Exception as e:
+            # st.empty()
+            response = "😵‍💫 Looks like someone unplugged something!\
+                    \n Either the model space is being updated or something is down.\
+                    \n\
+                    \n Try again later. \
+                    \n\
+                    \n Here's a random pic of a 🐶:"
+            st.write(response)
+            random_dog_pick = 'https://random.dog/'+ random_dog[np.random.randint(len(random_dog))]
+            st.image(random_dog_pick)
+            st.write("This was the error message:")
+            st.write(e)
+
+
+
+        
     st.session_state.messages.append({"role": "assistant", "content": response})
