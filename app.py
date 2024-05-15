@@ -36,7 +36,7 @@ model_links ={
 
 #Pull info about the model to display
 model_info ={
-    "Mistral":
+    "Mistral-7B":
         {'description':"""The Mistral model is a **Large Language Model (LLM)** that's able to have question and answer interactions.\n \
             \nIt was created by the [**Mistral AI**](https://mistral.ai/news/announcing-mistral-7b/) team as has over  **7 billion parameters.** \n""",
         'logo':'https://mistral.ai/images/logo_hubc88c4ece131b91c7cb753f40e9e1cc5_2589_256x0_resize_q97_h2_lanczos_3.webp'},
